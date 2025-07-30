@@ -1,0 +1,8 @@
+"./src/8473OLED_main.OBJ",
+"./src/SILABS_STARTUP.OBJ",
+"./src/button.OBJ",
+"./src/spi_oled_8473.OBJ",
+"./src/system_init.OBJ",
+"./src/test_image.OBJ",
+"./src/timer.OBJ"
+TO "8473OLED.OMF.CRBUILD" REMOVEUNUSED PRINT(.\8473OLED.m51) PAGEWIDTH (120) PAGELENGTH (65) CLASSES( ECODE(C:0x0 - C:0xfbfe), HCONST(C:0x0 - C:0xfbfe), XDATA(X:0x0 - X:0xfff), HDATA(X:0x0 - X:0xfff))

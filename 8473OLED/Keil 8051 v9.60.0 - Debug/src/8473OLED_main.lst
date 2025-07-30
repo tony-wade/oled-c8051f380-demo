@@ -1,0 +1,101 @@
+C51 COMPILER V9.60.0.0   8473OLED_MAIN                                                     07/24/2025 18:11:28 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE 8473OLED_MAIN
+OBJECT MODULE PLACED IN .\src\8473OLED_main.OBJ
+COMPILER INVOKED BY: C:\SiliconLabs\SimplicityStudio\v5_3\developer\toolchains\keil_8051\9.60\BIN\C51.exe C:\Users\User\
+                    -Desktop\OLED\F380_OLED\8473OLED\src\8473OLED_main.c OMF2 SMALL DEBUG OBJECTEXTEND ROM(LARGE) WARNINGLEVEL(2) FLOATFUZZY(
+                    -3) OPTIMIZE(2,SPEED) DEFINE(DEBUG=1) INTVECTOR(0X0000) INTPROMOTE INCDIR(C:/SiliconLabs/SimplicityStudio/v5_3/developer/
+                    -sdks/8051/v4.3.1//Device/shared/si8051Base;C:/SiliconLabs/SimplicityStudio/v5_3/developer/sdks/8051/v4.3.1//Device/C8051
+                    -F380/inc) PRINT(.\src\8473OLED_main.lst) COND PAGEWIDTH(120) PAGELENGTH(65) OBJECT(.\src\8473OLED_main.OBJ)
+
+line level    source
+
+   1          /*
+   2           * GPIO Configuration — see system_init.h
+   3           *
+   4           * SPI pins are hardware-defined:
+   5           *   - P0.0 : SCK (SCL / D6), < 10 MHz
+   6           *   - P0.2 : MOSI (SI / D7)
+   7           *   - P0.3 : NSS  (XCS)
+   8           *   - MISO is not used, but present.
+   9           *
+  10           * Additional OLED control pins:
+  11           *   - P0.4 : A0    (Command/Data select)
+  12           *   - P0.5 : XRES  (Reset)
+  13           *
+  14           * User input:
+  15           *   - P2.0 : SW    (Switch input, Silicon Labs macro)
+  16           *
+  17           * VAH(15V) is provide by external source
+  18           */
+  19          
+  20          //-----------------------------------------------------------------------------
+  21          // Includes
+  22          //-----------------------------------------------------------------------------
+  23          #include <SI_C8051F380_Register_Enums.h>                // SFR declarations
+  24          #include "system_init.h"
+  25          #include "button.h"
+  26          
+  27          //-----------------------------------------------------------------------------
+  28          // Constants
+  29          //-----------------------------------------------------------------------------
+  30          
+  31          
+  32          //-----------------------------------------------------------------------------
+  33          // SiLabs_Startup() Routine
+  34          // ----------------------------------------------------------------------------
+  35          void SiLabs_Startup (void)
+  36          {
+  37   1        PCA0MD = 0x00;                      // Disable watch-dog timer
+  38   1      }
+  39          
+  40          // ----------------------------------------------------------------------------
+  41          // Initialization
+  42          // ----------------------------------------------------------------------------
+  43          void Init_Device (void)
+  44          {
+  45   1          OSCILLATOR_Init();
+  46   1          Timer_Init();
+  47   1          PORT_Init();
+  48   1          SPI0_Init();
+  49   1          IE_EA = 1;     // Enable global interrupts
+  50   1      }
+  51          
+  52          
+C51 COMPILER V9.60.0.0   8473OLED_MAIN                                                     07/24/2025 18:11:28 PAGE 2   
+
+  53          //-----------------------------------------------------------------------------
+  54          // main() Routine
+  55          // ----------------------------------------------------------------------------
+  56          int main (void)
+  57          {
+  58   1        Init_Device();
+  59   1      
+  60   1        SPI0DAT = 0xFF;
+  61   1        while (!SPI0CN_SPIF);
+  62   1        SPI0CN_SPIF = 0;
+  63   1      
+  64   1        while (1) {
+  65   2            Button_Update();
+  66   2        }
+  67   1      }
+  68          
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     36    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+   EDATA SIZE       =   ----    ----
+   HDATA SIZE       =   ----    ----
+   XDATA CONST SIZE =   ----    ----
+   FAR CONST SIZE   =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
