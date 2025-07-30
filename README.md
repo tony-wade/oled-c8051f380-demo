@@ -1,4 +1,4 @@
-# Pioneer_OLED8473-C8051F380-demo
+## Pioneer_OLED8473-C8051F380-demo
 This project separates the control logic from the hardware layer, enabling flexible modification or migration to other microcontrollers.
 
 Features:
@@ -8,3 +8,4 @@ Features:
     2.  Clear separation between control logic and events
     
     3.  Modular design for custom input-event mapping and UI rendering 
+
